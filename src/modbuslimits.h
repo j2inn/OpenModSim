@@ -15,6 +15,8 @@
 class ModbusLimits final
 {
 public:
+    static constexpr int MaxLength = 65535;
+
     static int addressSpaceSize(AddressSpace space) {
         return (space == AddressSpace::Addr5Digits) ? 9999 : 65536;
     }
@@ -27,7 +29,7 @@ public:
         }
         return zeroBased ? QRange<int>(0, 65535) : QRange<int>(1, 65536);
     }
-    static QRange<int> lengthRange()   { return { 1, 65535 }; }
+    static QRange<int> lengthRange()   { return { 1, MaxLength }; }
     static QRange<int> lengthRange(int address, bool zeroBased, AddressSpace space) {
         const int offset = address - (zeroBased ? 0 : 1);
         const int maxLen = qMin(lengthRange().to(), addressSpaceSize(space) - offset);
