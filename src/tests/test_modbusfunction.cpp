@@ -178,11 +178,11 @@ void TestModbusFunction::limitsAddressRanges()
 void TestModbusFunction::limitsLengthRangeAtAddressSpaceEdges()
 {
     QCOMPARE(ModbusLimits::lengthRange().from(), 1);
-    QCOMPARE(ModbusLimits::lengthRange().to(), 200);
+    QCOMPARE(ModbusLimits::lengthRange().to(), 65535);
     QCOMPARE(ModbusLimits::slaveRange().from(), 0);
     QCOMPARE(ModbusLimits::slaveRange().to(), 255);
 
-    QCOMPARE(ModbusLimits::lengthRange(1, false, AddressSpace::Addr5Digits).to(), 200);
+    QCOMPARE(ModbusLimits::lengthRange(1, false, AddressSpace::Addr5Digits).to(), 9999);
     QCOMPARE(ModbusLimits::lengthRange(9900, false, AddressSpace::Addr5Digits).to(), 100);
     QCOMPARE(ModbusLimits::lengthRange(9999, false, AddressSpace::Addr5Digits).to(), 1);
     QCOMPARE(ModbusLimits::lengthRange(9999, true, AddressSpace::Addr5Digits).to(), 1);
